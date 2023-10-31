@@ -12,35 +12,6 @@ task main()
 
 	for(;;)
 	{
-		/*
-		// Shaker
-		if(vexRT[Btn8U])
-		{
-			while(vexRT[Btn8U])
-			{
-				motor[right_motor] = 127;
-				motor[left_motor] = -127;
-				delay(333);
-				motor[right_motor] = -127;
-				motor[left_motor] = 127;
-				delay(333);
-			}
-			continue;
-		}
-
-		// Precision control joystick
-		if(vexRT[Ch4] != 0 || vexRT[Ch3] != 0)
-		{
-			r_motor = (vexRT[Ch4] + vexRT[Ch3]) / SCALE_FACTOR;
-			l_motor = (-vexRT[Ch4] + vexRT[Ch3]) / SCALE_FACTOR;
-
-			// Constrain values
-			if(r_motor > 127) r_motor = 127 / SCALE_FACTOR;
-			if(r_motor < -127) r_motor = -127 / SCALE_FACTOR;
-			if(l_motor > 127) l_motor = 127 / SCALE_FACTOR;
-			if(l_motor < -127) l_motor = -127 / SCALE_FACTOR;
-		}
-		*/
 		// Normal control joystick
 		if(vexRT[Ch1] != 0 || vexRT[Ch2] != 0)
 		{
@@ -57,5 +28,7 @@ task main()
 		// Set motor speed
 		motor[right_motor] = r_motor;
 		motor[left_motor] = l_motor;
+
+		delay(50);
 	}
 }
