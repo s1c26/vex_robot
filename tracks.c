@@ -4,7 +4,7 @@
 // Controls tracks
 //
 
-const int MOTOR_COOLDOWN = 50
+const int MOTOR_COOLDOWN = 50;
 const int MOTOR_MAX = 127;
 
 task tracks()
