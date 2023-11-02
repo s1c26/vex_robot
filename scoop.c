@@ -1,20 +1,27 @@
+//
+// scoop.c
+//
+// Controls scoop
+//
+
+const int SCOOP_UP = 100;
+const int SCOOP_DOWN = 0;
+const int SCOOP_COOLDOWN = 50;
 
 task scoop()
 {
-	int r_motor = 0;
-	int l_motor = 0;
-
 	for(;;)
 	{
 		// Set servo position
-	if(vexRT[Btn6U])
-	{
-		motor[shovel] = 100;
-	}
-	if(vexRT[Btn6D])
-	{
-		motor[shovel] = 0;
-	}
-		delay(50);
+		if(vexRT[Btn6U])
+		{
+			motor[shovel] = SCOOP_UP;
+		}
+		if(vexRT[Btn6D])
+		{
+			motor[shovel] = SCOOP_DOWN;
+		}
+
+		delay(SCOOP_COOLDOWN);
 	}
 }

@@ -1,5 +1,11 @@
+//
+// tracks.c
+//
+// Controls tracks
+//
 
-// const int SCALE_FACTOR = 4;
+const int MOTOR_COOLDOWN = 50
+const int MOTOR_MAX = 127;
 
 task tracks()
 {
@@ -8,23 +14,21 @@ task tracks()
 
 	for(;;)
 	{
-		// Normal control joystick
-		if(vexRT[Ch1] != 0 || vexRT[Ch2] != 0)
-		{
-			r_motor = vexRT[Ch1] + vexRT[Ch2];
-			l_motor = -vexRT[Ch1] + vexRT[Ch2];
+		// Read joystick
+		r_motor = vexRT[Ch2] + vexRT[Ch1];
+		l_motor = vexRT[Ch2] - vexRT[Ch1];
 
-			// Constrain values
-			if(r_motor > 127) r_motor = 127;
-			if(r_motor < -127) r_motor = -127;
-			if(l_motor > 127) l_motor = 127;
-			if(l_motor < -127) l_motor = -127;
-		}
+		// Constrain values
+		if(r_motor > MOTOR_MAX) r_motor = MOTOR_MAX;
+		if(r_motor < -MOTOR_MAX) r_motor = -MOTOR_MAX;
+		if(l_motor > MOTOR_MAX) l_motor = MOTOR_MAX;
+		if(l_motor < -MOTOR_MAX) l_motor = -MOTOR_MAX;
 
 		// Set motor speed
 		motor[right_motor] = r_motor;
 		motor[left_motor] = l_motor;
 
-		delay(50);
+		// Small delay to prevent motor speed from changing too quickly
+		delay(MOTOR_COOLDOWN);
 	}
 }
