@@ -15,8 +15,8 @@ task tracks()
 	for(;;)
 	{
 		// Read joystick
-		r_motor = vexRT[Ch2] + vexRT[Ch1];
-		l_motor = vexRT[Ch2] - vexRT[Ch1];
+		r_motor = vexRT[Ch2] - vexRT[Ch1];
+		l_motor = vexRT[Ch2] + vexRT[Ch1];
 
 		// Constrain values
 		if(r_motor > MOTOR_MAX) r_motor = MOTOR_MAX;
