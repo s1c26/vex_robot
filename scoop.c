@@ -7,7 +7,7 @@
 // TODO: make servo move slower
 
 const int SCOOP_UP = 100;
-const int SCOOP_DOWN = 0;
+const int SCOOP_DOWN = -100;
 const int SCOOP_COOLDOWN = 50;
 
 task scoop()
