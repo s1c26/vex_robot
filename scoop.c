@@ -4,54 +4,47 @@
 // Controls scoop
 //
 
-// TODO: make servo move slower
-
 const int SCOOP_UP = 100;
 const int SCOOP_DOWN = -100;
 const int SCOOP_MIDDLE = 0;
-const int SERVO_SPEED = 10;
-
-void setServoSpeed(int current_pos, int new_pos, int speed)
-{
-	if(new_pos == current_pos)
-	{
-		return;
-	}
-	else if(new_pos < current_pos)
-	{
-		for(int i = current_pos; i < new_pos; i++)
-		{
-			motor[scoop_servo] = i;
-			delay(1000 / speed);
-		}
-	}
-	else if(new_pos > current_pos)
-	{
-		for(int i = current_pos; i > new_pos; i--)
-		{
-			motor[scoop_servo] = i;
-			delay(1000 / speed);
-		}
-	}
-}
+const int SCOOP_FAST = 10;
+const int SCOOP_SLOW = 5;
+const int SCOOP_COOLDOWN = 20;
 
 task scoop()
 {
+	motor[scoop_servo] = SCOOP_MIDDLE;
 	int current_position = 0;
+
 	for(;;)
 	{
-		// Set servo position
-		if(vexRT[Btn6U])
+		// Move servo slowly
+		if(vexRT[Btn6U] == 1)
 		{
-			setServoSpeed(current_position, SCOOP_UP, SERVO_SPEED);
+			current_position+= SCOOP_SLOW;
 		}
-		else if(vexRT[Btn6D])
+		if(vexRT[Btn6D] == 1)
 		{
-			setServoSpeed(current_position, SCOOP_DOWN, SERVO_SPEED);
+			current_position-= SCOOP_SLOW;
 		}
-		else if(vexRT[Btn6D])
+
+		// Move servo quickly
+		if(vexRT[Btn5U] == 1)
 		{
-			setServoSpeed(current_position, SCOOP_MIDDLE, SERVO_SPEED);
+			current_position+= SCOOP_FAST;
 		}
+		if(vexRT[Btn5D] == 1)
+		{
+			current_position-= SCOOP_FAST;
+		}
+
+		// Constrain positions
+		if(current_position > SCOOP_UP) current_position = SCOOP_UP;
+		if(current_position < SCOOP_DOWN) current_position = SCOOP_DOWN;
+
+		// Move motor
+		motor[scoop_servo] = current_position;
+
+		wait1Msec(SCOOP_COOLDOWN);
 	}
 }

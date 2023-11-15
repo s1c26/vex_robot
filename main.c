@@ -15,6 +15,6 @@ task main()
 	// Keep program running
 	for(;;)
 	{
-		delay(1);
+		wait1Msec(1);
 	}
 }

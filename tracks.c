@@ -29,6 +29,6 @@ task tracks()
 		motor[left_motor] = l_motor;
 
 		// Small delay to prevent motor speed from changing too quickly
-		delay(MOTOR_COOLDOWN);
+		wait1Msec(MOTOR_COOLDOWN);
 	}
 }
