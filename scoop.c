@@ -4,8 +4,8 @@
 // Controls scoop
 //
 
-const int SCOOP_UP = 100;
-const int SCOOP_DOWN = -100;
+const int SCOOP_UP = -127;
+const int SCOOP_DOWN = 127;
 const int SCOOP_MIDDLE = 0;
 const int SCOOP_FAST = 10;
 const int SCOOP_SLOW = 5;
